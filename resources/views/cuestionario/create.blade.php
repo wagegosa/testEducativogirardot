@@ -27,6 +27,8 @@
         <li>Por favor contesta a todas las sentencias.</li>
     </ul>
 
+    <div class="hr-line-solid"></div>
+
     {!! Form::open(['route' => 'cuestionario.store', 'action' => 'post', 'autocomplete' => 'off']) !!}
         <!-- Formulario -->
         @include('cuestionario._form', ['btnIco'=>'<i class="fa fa-save fa-lg mr-2"></i>',
