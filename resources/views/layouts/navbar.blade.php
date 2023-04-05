@@ -35,6 +35,7 @@
                 <a href="{{ route('home') }}"><i class="fa fa-home"></i> <span
                         class="nav-label">Inicio</span></a>
             </li>
+            @hasrole('Docente')
             <li class="{{ setActive('modules*') }}">
                 <a href="#" aria-expanded="false"><i class="fa fa-th-list"></i> <span class="nav-label">Módulos</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
@@ -43,9 +44,17 @@
                     </li>
                 </ul>
             </li>
+            @endhasrole
+            @hasrole('Estudiante')
             <li>
                 <a href="{{ route('cuestionario.create') }}"><i class="fa fa-comments-o"></i> <span
                         class="nav-label">Cuestionario</span>
+                </a>
+            </li>
+            @endhasrole
+            <li class="{{ setActive('admin/programas*') }}">
+                <a href="{{ route('pregrado.index') }}"><i class="fa fa-graduation-cap"></i> <span
+                        class="nav-label">Programas</span>
                 </a>
             </li>
             @hasanyrole('Super-Admin|Administrador')
