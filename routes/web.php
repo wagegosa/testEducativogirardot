@@ -1,11 +1,12 @@
 <?php
 
+    use App\Http\Controllers\CareerController;
     use App\Http\Controllers\PermissionController;
     use App\Http\Controllers\QuestionController;
     use App\Http\Controllers\QuestionnaireController;
     use App\Http\Controllers\RoleController;
     use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +55,11 @@ Route::group(['prefix'=>'admin', 'middleware' => ['auth', 'verified', 'role:Supe
         ->name('usuarios.perfil');
     Route::match(['put', 'patch'], '/sistema/usuarios', [UserController::class, 'updateProfile'])
         ->name('usuarios.updateProfile');
+
+    Route::resource('/programas',CareerController::class)->names('pregrado');
 });
 
-Route::group(['prefix'=>'modules', 'middleware' => ['auth', 'verified']], function(){
+Route::group(['prefix'=>'modules', 'middleware' => ['auth', 'verified', 'role:Docente']], function(){
     Route::resource('/preguntas',QuestionController::class);
 });
 
