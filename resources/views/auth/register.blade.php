@@ -17,11 +17,51 @@
         @enderror
     </div>
     <div class="form-group">
+        {!! Form::label('date_birth', 'Fecha de Nacimiento', ['class' => 'form-label required']) !!}
+        {!! Form::date('date_birth', \Illuminate\Support\Carbon::now(), ['id' => 'date_birth', 'class' => 'form-control']) !!}
+        @error('date_birth')
+        <span class="text-danger m-b-none">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="form-group">
+        {!! Form::label('identity_number', 'Número de Identificación', ['class' => 'form-label
+        required']) !!}
+        {!! Form::text('identity_number', '', ['class' => 'form-control text-capitalize'.
+        ($errors->has('identity_number') ? ' is-invalid' : null)]) !!}
+        @error('identity_number')
+        <span class="text-danger m-b-none">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="form-group">
+        {!! Form::label('gender', 'Género', ['class' => 'form-label required']) !!}
+        <div class="i-checks">
+            <label>
+                {!! Form::radio('gender', 'male', null, []) !!} <i></i>Masculino
+            </label>
+            <label>
+                {!! Form::radio('gender', 'female', null, []) !!} <i></i>Femenino
+            </label>
+        </div>
+        @error('gender')
+        <span class="text-danger m-b-none">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="form-group">
         {!! Form::label('email', __('Email Address'), ['class' => 'form-label required'])
          !!}
         {!! Form::email('email', '', ['id' => 'email', 'class' => 'form-control
         text-lowercase'.($errors->has('email') ? ' is-invalid' : null)]) !!}
         @error('email')
+        <span class="text-danger m-b-none">{{ $message }}</span>
+        @enderror
+    </div>
+    <div class="form-group">
+        {!! Form::label('career', 'Carrera / Programa de Pregrado', ['class' => 'form-label
+        required']) !!}
+        {!! Form::select('career', $careers, null, ['id' => 'career', 'class' =>
+        'select2 form-control',
+        'placeholder' => 'Seleccione...', 'lang' => 'es']) !!}
+        @error('career')
         <span class="text-danger m-b-none">{{ $message }}</span>
         @enderror
     </div>

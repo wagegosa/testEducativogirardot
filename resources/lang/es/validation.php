@@ -154,6 +154,7 @@ return [
         'city'                  => 'ciudad',
         'company_name'          => 'razón social',
         'class_brand'           => 'clase o marca',
+        'career'                => 'carrera / programa de pregrado',
         'content'               => 'contenido',
         'country'               => 'país',
         'date'                  => 'fecha',

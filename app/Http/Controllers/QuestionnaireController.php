@@ -30,7 +30,7 @@ class QuestionnaireController extends Controller
      */
     public function create()
     {
-        $questions = Question::with('answers')->take(3)->get();
+        $questions = Question::with('answers')->get();
         return view('cuestionario.create', compact('questions'));
     }
 
@@ -43,10 +43,11 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
         $questions = $request->get('question_id');
-        $answers = $request->get('is_correct');
+        $answers = $request->get('answer_id');
 
         #Crea un nuevo array, usando una matriz para las claves y otra para sus valores
         $array_questionnaires = array_combine($questions, $answers);
+        #return response()->json(['data' => $request->all(), $array_questionnaires]);
 
         DB::beginTransaction();
         try{
@@ -64,7 +65,6 @@ class QuestionnaireController extends Controller
             DB::rollBack();
             $toastr = Toastr::warning('Ha ocurrido un error en la solicitud. Código de excepción No. '.$e->getMessage());
         }
-
 
         return redirect()->route('home')->with($toastr);
     }

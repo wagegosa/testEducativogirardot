@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,6 +22,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'date_birth',
+        'gender',
+        'identity_number',
+        'career_id',
         'password',
     ];
 
@@ -50,8 +55,34 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
+    public function career()
+    {
+        return $this->belongsTo(Career::class);
+    }
+
     public function questionnaires()
     {
         return $this->hasMany(Questionnaire::class);
+    }
+
+    public function getGenderAttribute($value)
+    {
+        return $value == 'male' ? 'Masculino' : 'Femenino';
+    }
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->date_birth)->age;
+    }
+
+    public function getFormatDateAttribute()
+    {
+        #https://www.digitalocean.com/community/tutorials/easier-datetime-in-laravel-and-php-with-carbon
+        return Carbon::parse($this->date_birth)->toFormattedDateString();
+    }
+
+    public function getPictureGenderAttribute()
+    {
+        return $this->gender == 'male' ? asset('img/nobody_m.original.jpg') : asset('img/nobody_f.original.jpg');
     }
 }

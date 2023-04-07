@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\StudentFactory;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +16,12 @@ class DatabaseSeeder extends Seeder
     {
         #\App\Models\User::factory(10)->create();
         $this->call([
+            CareerSeeder::class,
+            LearningStyleSeeder::class,
             PermissionsSeeder::class,
             UserRolePermissionSeeder::class,
+            QuestionSeeder::class,
+            AnswerSeeder::class,
         ]);
     }
 }

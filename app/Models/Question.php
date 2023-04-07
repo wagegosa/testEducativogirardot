@@ -9,9 +9,14 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'value', 'user_id'];
+    protected $fillable = ['learning_style_id', 'title', 'value', 'user_id'];
 
     protected $dates = ['created_at', 'updated_at'];
+
+    public function learningStyles()
+    {
+        return $this->belongsTo(LearningStyle::class);
+    }
 
     public function user()
     {
@@ -28,11 +33,11 @@ class Question extends Model
         return $this->hasMany(Questionnaire::class);
     }
 
-    public function setTitleAttribute($value)
-    {
-        #Conviente un string en mayúsculas.
-        $this->attributes['title'] = trim(mb_strtoupper($value));
-    }
+    //public function setTitleAttribute($value)
+    //{
+    //    #Conviente un string en mayúsculas.
+    //    $this->attributes['title'] = trim(mb_strtoupper($value));
+    //}
 
     public function getUserAttribute()
     {

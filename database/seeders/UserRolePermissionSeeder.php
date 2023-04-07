@@ -29,9 +29,9 @@ class UserRolePermissionSeeder extends Seeder
 
         // Usuario Super-Administrador
         $userSuperAdmin = User::create([
-            'name' => 'John Doe',
-            'email' => 'john.doe@superadmin.com',
-            'password' => bcrypt('user.super.admin'),
+            'name'              => 'John Doe',
+            'email'             => 'john.doe@superadmin.com',
+            'password'          => bcrypt('user.super.admin'),
             'email_verified_at' => Carbon::now()
         ]);
 
@@ -45,9 +45,9 @@ class UserRolePermissionSeeder extends Seeder
 
         // Usuario Administrador
         $userAdmin = User::create([
-            'name' => 'Jane Doe',
-            'email' => 'jane.doe@admin.com',
-            'password' => bcrypt('user.admin'),
+            'name'              => 'Jane Doe',
+            'email'             => 'jane.doe@admin.com',
+            'password'          => bcrypt('user.admin'),
             'email_verified_at' => Carbon::now()
         ]);
 
@@ -57,9 +57,9 @@ class UserRolePermissionSeeder extends Seeder
 
         // Usuario Supervisor
         $userSupervisor = User::create([
-            'name' => 'Richard Roe',
-            'email' => 'richard.roe@supervisor.com',
-            'password' => bcrypt('user.supervisor'),
+            'name'              => 'Richard Roe',
+            'email'             => 'richard.roe@supervisor.com',
+            'password'          => bcrypt('user.supervisor'),
             'email_verified_at' => Carbon::now()
         ]);
 
@@ -67,9 +67,37 @@ class UserRolePermissionSeeder extends Seeder
         $roleSupervisor = Role::create(['name' => 'Supervisor']);
         $userSupervisor->assignRole('Supervisor');
 
-        // Role Agente
+        // Usuario Docente
+        $userDocente = User::create([
+            'name'              => 'Gabriela Mistral',
+            'email'             => 'gabriela.mistral@docente.com',
+            'date_birth'        => '1889-04-07',
+            'gender'            => 'female',
+            'identity_number'   => '18890407',
+            'career_id'         => 6,
+            'password'          => bcrypt('user.docente'),
+            'email_verified_at' => Carbon::now()
+        ]);
+
+        // Role Docente
         $roleDocente = Role::create(['name' => 'Docente']);
+        $userDocente->assignRole('Docente');
+
+        // Usuario Estudiante
+        $userEstudiante = User::create([
+            'name'              => 'Malala Yousafzai',
+            'email'             => 'malala@estudiante.com',
+            'date_birth'        => '1997-06-12',
+            'gender'            => 'female',
+            'identity_number'   => '19970612',
+            'career_id'         => 6,
+            'password'          => bcrypt('user.estudiante'),
+            'email_verified_at' => Carbon::now()
+        ]);
+
+        // Role Estudiante
         $roleEstudiante = Role::create(['name' => 'Estudiante']);
+        $userEstudiante->assignRole('Estudiante');
 
         // Consulta los permisos
         $permisos = Permission::pluck('id', 'id')->all();

@@ -120,7 +120,7 @@ class UserController extends Controller
             'name'     => 'required|string|min:3',
             'email'    => 'required|email|unique:users,email'.$usuario,
             'password' => 'same:confirm-password',
-            'roles.*'  => 'required'
+            'roles'    => 'required'
         ]);
 
         $input = $request->all();
